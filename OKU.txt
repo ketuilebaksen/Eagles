@@ -1,0 +1,103 @@
+EAGLES — KANAL KURULUMU
+========================
+
+Takim: Philadelphia Eagles | Stadyum: Lincoln Financial Field
+Kadro 2026 sezonuna gore: Jalen Hurts, Saquon Barkley, A.J. Brown,
+DeVonta Smith, Jalen Carter, Zack Baun — bas antrenor Nick Sirianni
+(altinci sezonu), genel menajer Howie Roseman.
+
+Depoyu bos actin (README yok) — bu sefer "unrelated histories" hatasi
+cikmayacak, normal push yeter.
+
+Bu paket Second Floor'un aynisi: coklu stok havuzu (broll, broll2,
+broll3...) ve oyuncu havuzu destegi icinde hazir geliyor. Kuyruk SES
+DOSYASI kabul ediyor; yanlislikla birakilan bir .txt sessizce yok
+sayilir, render'i kirmaz.
+
+
+RENK NOTU
+---------
+Vurgu rengini Eagles'in kelly green tonu yaptim. Resmi midnight green
+(#004C54) sistemdeki lacivert kart zemininde koyu kaliyor, yazi
+okunmuyordu — ikisini de render edip karsilastirdim. Kelly green de
+Eagles'in kendi rengi, ekranda cok daha iyi duruyor.
+
+
+ADIM 1 — BILGISAYARINA INDIR
+----------------------------
+github.com/ketuilebaksen/Eagles -> Code -> Open with GitHub Desktop
+
+
+ADIM 2 — DOSYALARI KOPYALA
+--------------------------
+Bu zip'in icindekilerin hepsini (OKU.txt haric) o klasore KOPYALA.
+Ctrl+A -> Ctrl+C -> klasorde Ctrl+V.   Ctrl+X KULLANMA.
+
+Dogru kopyaladiysan klasorde sunlar olur:
+  .git  .github  assets  content  scripts  .gitignore  channel.json
+
+.github ve content klasorleri Windows'ta gizli gorunebilir — Explorer'da
+"Hidden items" kutusunu ac, oradalar.
+
+
+ADIM 3 — GONDER
+---------------
+GitHub Desktop -> Current repository: Eagles oldugundan EMIN OL
+Summary: "ilk kurulum" -> Commit to main -> Push origin
+
+
+ADIM 4 — IZIN (sart)
+--------------------
+Settings -> Actions -> General -> en altta "Workflow permissions"
+"Read and write permissions" sec -> Save
+
+Bu olmadan video render edilir ama Release'e yuklenemez.
+API anahtarina GEREK YOK — sesi kendi programin uretiyor.
+
+
+ADIM 5 — STOK VIDEOLARI YUKLE
+-----------------------------
+Releases -> Create a new release
+  Tag    : broll     (kutuya yaz, "Create new tag" cikacak, tikla)
+  Title  : broll
+  Dosya  : Eagles stok videolarini surukle
+  ---> "Publish release"   ("Save draft" e BASMA)
+
+Bir release'e ~1000 dosya siginiyor. Doldugunda broll2, broll3 diye devam
+et — sistem broll ile baslayan butun release'leri kendiliginden tariyor.
+
+Istege bagli ayni yontemle:
+  music     arka plan muzikleri
+  ambient   stadyum ugultusu
+  photos    oyuncu / takim fotograflari
+
+
+ADIM 6 — ILK VIDEO
+------------------
+Ses otomasyonunda kanal listesine ekle, depo adi: Eagles
+Program metni seslendirip mp3'u content/queue icine yazacak ve kendi
+push'unu atacak.
+
+Elle yapmak istersen: mp3'u content/queue icine at, dosya adi videonun
+basligi olsun, commit + push.
+
+Render kaydinda sunu goreceksin:
+  [assemble] b-roll: 240 clips (offset 3)
+  [assemble] kurgu karisimi: 34 stok video / 0 fotograf / ... (stok %100)
+
+"b-roll: 0 clips" yaziyorsa broll release'i taslakta kalmis demektir.
+
+
+ISTEGE BAGLI — TEK OYUNCUYA OZEL HAVUZ
+--------------------------------------
+Bir videoda sadece belirli klipler kullanilsin istersen:
+  Release tag : oyuncu-jalen-hurts   (ya da takim-philadelphia-eagles)
+  Icine en az 12 klip koy, Publish et.
+Metinde o isim en cok geciyorsa video sadece o havuzdan kurulur.
+12'nin altinda kalirsa eksigi genel broll'dan tamamlar.
+
+
+ISTEGE BAGLI — HAREKETLI GRAFIKLER
+----------------------------------
+motion-lib.yml de icinde. Actions -> motion-lib -> Run workflow (bir kez,
+~1,5 saat), sonra channel.json'a "motion_rate": 0.12 ekle.
